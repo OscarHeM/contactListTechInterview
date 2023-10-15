@@ -1,0 +1,101 @@
+<template>
+<lightning-card icon-name="standard:client">
+    <h1 slot="title">Contact List</h1>
+    <!-- Initial spinner shows before the data is rendered -->
+    <template if:false={initialLoad}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <template if:true={initialLoad}>
+        <div class="slds-m-around_medium">    
+            <div class="slds-m-bottom_medium">
+                <!-- Input for searching contact by name -->
+                <lightning-input 
+                    type="search" 
+                    onchange={handleKeyChange} 
+                    class="slds-m-bottom_small"           
+                    label="Search Contacts by Name" 
+                    value={searchKey}>
+                </lightning-input>
+                <template if:true={showTable}>
+                    <!-- Table that renders the contact information -->
+                    <lightning-datatable 
+                        data-id="table" 
+                        key-field="Id" 
+                        data={data} 
+                        columns={columns} 
+                        sorted-by={sortedBy}
+                        sorted-direction={sortedDirection} 
+                        onsort={sortColumns}
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </template>
+                <template if:false={showTable}>
+                    <!-- Message that displays with an icon when the contact search is unsuccessful -->
+                    <div class="unsuccessful-search-container">
+                        <div class="search-icon">
+                            <lightning-icon
+                                icon-name="utility:search" 
+                                alternative-text="Oops" 
+                                title="Oops"
+                                size="large"
+                            ></lightning-icon>
+                        </div>
+                        
+                        <p class="mismatch-text">Oops! It looks like there is no match for your search.</p>
+                    </div>
+                </template>
+            </div>
+            <template if:true={showTable}>
+
+                <div slot="footer">
+                    <div class="footer-container">
+                        <!-- Text container that displays the number of records in the table. Dynamic when contacts are filtered by name-->
+                        <div>
+                            Total Records: {totalRecountCount}
+                        </div>
+                        <!-- Container that stores the pagination functionality, including buttons and a page counter -->
+                        <div class="pagination-container">
+                            <lightning-icon
+                                icon-name="utility:chevronleft" 
+                                alternative-text="Previous" 
+                                title="Previous"
+                                size="small"
+                                class="blue-icon"
+                                onclick={previousHandler}
+                            ></lightning-icon>
+                            <div class="page-counter-container">
+                                Page {page} of {totalPage}
+                            </div>
+                            <lightning-icon
+                                icon-name="utility:chevronright" 
+                                alternative-text="Next" 
+                                title="Next"
+                                size="small"
+                                class="blue-icon"
+                                onclick={nextHandler}
+                            ></lightning-icon>
+                        </div>
+                        <!-- Container for selecting the number of records displayed per page -->
+                        <div class="combobox-container">
+                            <div class="combobox-label">
+                                Records per page: 
+                            </div>
+                            <lightning-combobox
+                                        name="pageSizeOpt"
+                                        label=""
+                                        variant="label-hidden"
+                                        value={value}
+                                        placeholder="select"
+                                        options={pageOptions}
+                                        onchange={handleChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                   </div>
+            </template>
+        </div>
+    </template>
+    
+</lightning-card>
+
+</template>

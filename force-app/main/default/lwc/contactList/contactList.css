@@ -1,0 +1,56 @@
+.blue-icon{
+    --lwc-colorTextIconDefault: rgb(1, 118, 211);
+    cursor: pointer;
+}
+
+.grey-icon{
+    --lwc-colorTextIconDefault: rgb(116, 116, 116);
+    cursor: pointer;
+}
+
+.unsuccessful-search-container{
+    display:flex; 
+    flex-direction: column; 
+    justify-content:center;
+    margin:15px 0;
+}
+
+.search-icon{
+    display:flex; 
+    justify-content:center;
+}
+
+.mismatch-text{
+    font-size: 20px; 
+    font-weight: bold; 
+    color:rgb(116, 116, 116);
+    display:flex;
+    justify-content:center;
+}
+
+.footer-container{
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+}
+
+.pagination-container{
+    width:50%; 
+    display:flex;
+    justify-content:center;
+}
+
+.page-counter-container{
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.combobox-container{
+    display:flex;
+}
+
+.combobox-label{
+    margin-right: 5px; 
+    display:flex; 
+    align-items:center;
+}
